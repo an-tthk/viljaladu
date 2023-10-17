@@ -26,12 +26,28 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lisa-auto-modal">
             Lisa auto
         </button>
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lisa-mass-modal">
-            Lisa väljumismass
-        </button>
     </div>
 </div>
+
+<form method="post" action="">
+    <table class="table table-striped table-hover table-responsive">
+        <tr>
+            <th>Auto nr.</th>
+            <th>Sisenemismass</th>
+            <th>Väljumismass</th>
+            <th></th>
+        </tr>
+        <?php foreach($autod as &$auto): ?>
+            <?php $modal_name = "auto". $auto->id; ?>
+            <tr>
+                <td><a href="#<?php echo $modal_name; ?>-modal" data-bs-toggle="modal" data-bs-target="#<?php echo $modal_name; ?>-modal"><?= $auto->autonr ?></a></td>
+                <td><?= $auto->sisenemismass ?></td>
+                <td><?= $auto->lahkumismass ?></td>
+                <td><a href="#lisa-mass-modal" data-bs-toggle="modal" data-bs-target="#lisa-mass-modal" data-bs-auto_id="<?= $auto->id ?>">Lisa väljumismass</a></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</form>
 
 <!-- Modals -->
 <form class="row g-3 col-sm-3" method="post" action="">
@@ -73,26 +89,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <dl>
-                        <dd>
-                            <div class="input-group col">
-                                <span class="input-group-text">Auto</span>
-                                <select name="auto_id" class="form-select col-md-3">
-                                    <?php
-                                        foreach ($autod as &$auto) {
-                                            echo "<option value='$auto->id'>$auto->autonr</option>";
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                        </dd>
-                        <dd>
-                            <div class="input-group col">
-                                <span class="input-group-text">Väljumismass</span>
-                                <input class="form-control" type="number" name="valjumismass" aria-label="Väljumismass" />
-                            </div>
-                        </dd>
-                    </dl>
+                    <div class="input-group col">
+                        <input type="hidden" id="auto_id" name="auto_id" />
+                        <span class="input-group-text">Väljumismass</span>
+                        <input class="form-control" type="number" name="valjumismass" aria-label="Väljumismass" />
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -103,19 +104,45 @@
     </div>
 </form>
 
-<form method="post" action="">
-    <table class="table table-striped table-hover table-responsive">
-        <tr>
-            <th>Auto nr.</th>
-            <th>Sisenemismass</th>
-            <th>Väljumismass</th>
-        </tr>
-        <?php foreach($autod as &$auto): ?>
-            <tr>
-                <td><?= $auto->autonr ?></td>
-                <td><?= $auto->sisenemismass ?></td>
-                <td><?= $auto->lahkumismass ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-</form>
+<?php foreach($autod as &$auto): ?>
+    <?php $modal_name = "auto". $auto->id; ?>
+    <div class="modal fade" id="<?php echo $modal_name; ?>-modal" tabindex="-1" aria-labelledby="<?php echo $modal_name; ?>-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="<?php echo $modal_name; ?>-modal-label">Information</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                        $r = array_filter($autod, function($elem) use($auto) {
+                            return $elem->autonr == $auto->autonr;
+                        });
+                    ?>
+                    <div class="row">
+                        Kokku reisid: <?php echo count($r); ?>
+                    </div>
+                    <div class="row">
+                        Kokku sisenemismass: <?php echo array_sum(array_column($r, 'sisenemismass')); ?>
+                    </div>
+                    <div class="row">
+                        Kokku väljumismass: <?php echo array_sum(array_column($r, 'lahkumismass')); ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<script>
+    const lisaMassMadal = document.querySelector('#lisa-mass-modal');
+    lisaMassMadal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
+        const auto_id = button.getAttribute('data-bs-auto_id');
+
+        document.getElementById('auto_id').value = auto_id;
+    });
+</script>
