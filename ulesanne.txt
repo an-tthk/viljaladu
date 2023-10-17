@@ -1,0 +1,11 @@
+Viljaladu
+
+Andmetabel koormad: (id, autonr, sisenemismass, lahkumismass)
+
+* Koosta tabel. Loo SQL lause auto lisamiseks Koos autonumbri ja sisenemismassiga. Loo SQL lause valitud id-ga auto lahkumismassi määramiseks.
+
+* Koosta veebileht, kus saab sisestada autonumbri Ja sisenemismassi. Koosta teine veebileht, kus valitud autole saab määrata väljumismassi.
+
+* Koosta leht, kus näha tulnud autod koos andmetega ning maha laetud koormate suurused. Autonumbrile vajutades näidatakse kõik selle auto reisid ning arvutatakse kokku toodud vilja kogus.
+
+* Lisada ühine teemakohane kujundus kõikidele lehtedele eraldi SSO failiga.

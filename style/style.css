@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Exo+2:wght@400&display=swap');
+
+hr {
+    margin: 22px 0;
+    height: 1px;
+    border: 0;
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+::selection {
+    background: #ffdd95;
+}
+
+::-moz-selection {
+    background: #ffdd95;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    font: 300 15px/140% 'Exo 2', Tahoma, Verdana, Segoe, sans-serif;
+    /*min-width: 320px;*/
+    min-height: 1000px;
+    padding-bottom: 80px;
+}
+
+main {
+    max-width: 60%;
+    min-height: 100%;
+    margin: 0 auto;
+    padding-top: 24px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    background: #999;
+    height: auto;
+    width: 100vw;
+    padding: 10px;
+    color: #111;
+    margin-bottom: -20px;
+}
+
+footer > p {
+    display: block;
+    font-size: 12pt;
+    text-transform: uppercase;
+}
