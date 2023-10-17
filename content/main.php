@@ -21,10 +21,18 @@
 <h2 class="row g-3 mt-1 col-mb-3">Viljaladu</h2>
 
 <!-- Buttons trigger modal -->
-<div class="row g-3 my-5 col-sm-3">
+<div class="row g-3 my-5 col-sm-15">
     <div class="col col-auto mb-3">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lisa-auto-modal">
+        <button type="button" class="btn btn-primary col" data-bs-toggle="modal" data-bs-target="#lisa-auto-modal">
             Lisa auto
+        </button>
+
+        <button type="button" class="btn btn-primary col" data-bs-toggle="modal" data-bs-target="#lehti-main-kood" data-bs-page="content/main.php">
+            Lehe PHP Kood (main.php)
+        </button>
+
+        <button type="button" class="btn btn-primary col" data-bs-toggle="modal" data-bs-target="#lehti-index-kood" data-bs-page="index.php">
+            Lehe PHP Kood (index.php)
         </button>
     </div>
 </div>
@@ -136,6 +144,40 @@
         </div>
     </div>
 <?php endforeach; ?>
+
+<div class="modal fade" id="lehti-main-kood" tabindex="-1" aria-labelledby="lehti-main-kood-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="lehti-main-kood-label">Lehe PHP Kood</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php highlight_file('content/main.php'); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="lehti-index-kood" tabindex="-1" aria-labelledby="lehti-index-kood-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="lehti-index-kood-label">Lehe PHP Kood</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php highlight_file('index.php'); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     const lisaMassMadal = document.querySelector('#lisa-mass-modal');
